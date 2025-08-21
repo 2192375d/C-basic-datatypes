@@ -1,5 +1,5 @@
 #include "graph.h"
-#include "../APIlinkedList/linkedList.c"
+#include "linkedList.c"
 #include "stdio.h"
 #include "stdlib.h"
 

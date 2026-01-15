@@ -1,5 +1,3 @@
-#ifndef ARRAY_H
-#define ARRAY_H
 
 #include "array.h"
 #include "stdio.h"
@@ -329,5 +327,3 @@ int **matrix_array_to_pointer(int N, int M, int matrix[N][M]) {
 
     return result_matrix;
 }
-
-#endif

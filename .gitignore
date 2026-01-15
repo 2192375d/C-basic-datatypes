@@ -1,0 +1,4 @@
+*.o
+tests
+a.out
+EOF

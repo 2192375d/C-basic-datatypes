@@ -1,5 +1,4 @@
 #include "bst.h"
-// #include "linkedList.h"
 #include "stdio.h"
 #include "stdlib.h"
 
@@ -165,7 +164,7 @@ bst_node *bst_delete(bst_node *root) {
     root->right = bst_delete(root->right);
 
     free(root);
-    return root;
+    return NULL;
 }
 
 ////////////////////////////////////////////////////////////////

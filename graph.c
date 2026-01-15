@@ -1,5 +1,5 @@
 #include "graph.h"
-#include "linkedList.c"
+#include "linkedList.h"
 #include "stdio.h"
 #include "stdlib.h"
 
@@ -114,7 +114,7 @@ void graph_list_print_bfs(graph *g, int start) {
     }
 
     visited[start] = 1;
-    queue = enqueue(queue, start);
+    queue = linked_list_insert_end(queue, start);
 
     while (queue != NULL) {
 
@@ -125,13 +125,13 @@ void graph_list_print_bfs(graph *g, int start) {
             if (visited[temp->value] == 0) {
 
                 // printf("%d->%d ", queue->value, temp->value);
-                queue = enqueue(queue, temp->value);
+                queue = linked_list_insert_end(queue, temp->value);
                 visited[temp->value] = 1;
             }
 
             temp = temp->next;
         }
-        queue = dequeue(queue);
+        queue = linked_list_delete_count(queue, 0);
     }
 }
 
@@ -185,7 +185,7 @@ void graph_matrix_print_bfs(int **matrix, int start, int N) {
     }
 
     visited[start] = 1;
-    queue = enqueue(queue, start);
+    queue = linked_list_insert_end(queue, start);
 
     while (queue != NULL) {
 
@@ -193,36 +193,14 @@ void graph_matrix_print_bfs(int **matrix, int start, int N) {
 
         for (int i = 0; i < N; i++) {
             if (matrix[queue->value][i] == 1 && visited[i] == 0) {
-                queue = enqueue(queue, i);
+                queue = linked_list_insert_end(queue, i);
                 visited[i] = 1;
             }
         }
 
-        queue = dequeue(queue);
+        queue = linked_list_delete_count(queue, 0);
     }
 }
-
-////////////////////////////////////////////////////////////////
-
-// int graph_matrix_get_shortest_distance_dfs(int **matrix, int src, int dest,
-//                                            int *visited, int N) {
-//
-//     if (src == dest) {
-//         return 0;
-//     }
-//
-//     int count = 0;
-//     visited[src] = 1;
-//
-//     for (int i = 0; i < N; i++) {
-//         if (matrix[src][i] == 1 && visited[i] == 0) {
-//             count += graph_matrix_get_shortest_distance_dfs(matrix, i, dest,
-//                                                             visited, N);
-//         }
-//     }
-//
-//     return count + 1;
-// }
 
 ////////////////////////////////////////////////////////////////
 

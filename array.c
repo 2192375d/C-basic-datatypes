@@ -90,6 +90,19 @@ int array_get_minimum_index(int array[], int N) {
 ////////////////////////////////////////////////////////////////
 
 void matrix_print(int **matrix, int N, int M) {
+    /*
+     * The function takes an input N x M matrix, and prints it. Numbers are
+     * seperated by a space.
+     *
+     * For example:
+     *      matrix[2][5] = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}};
+     *      The ouput will be
+     *      1 2 3 4 5
+     *      6 7 8 9 10
+     * Note that the matrix will look misaligned due to occurences of values >
+     * 10 or negative sign stuffs
+     */
+
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
             printf("%d ", matrix[i][j]);
@@ -123,6 +136,11 @@ void array_constant_valued_get(int array[], int value, int N) {
 
 void array_bubble_sort(int array[], int N) {
 
+    /*
+     * Worst case time complexity: O(N^2)
+     * Average case time complexity: O(N^2)
+     * Best case time complexity: O(N) (array already sorted forward)
+     */
     _Bool swapped = 1;
     for (int i = 0; i < N - 1 && swapped == 1; i++) {
         swapped = 0;
@@ -139,6 +157,10 @@ void array_bubble_sort(int array[], int N) {
 
 void array_selection_sort(int array[], int N) {
 
+    /*
+     * All case time complexity: O(N^2)
+     * (Note that the time complexity is always fixed)
+     */
     int minimum_index = 0;
 
     for (int i = 0; i < N; i++) {
@@ -151,6 +173,11 @@ void array_selection_sort(int array[], int N) {
 
 void array_insertion_sort(int array[], int N) {
 
+    /*
+     * Worst case time complexity: O(N^2)
+     * Average case time complexity: O(N^2)
+     * Best case time complexity: O(N) (array already sorted forward)
+     */
     int temp = 0;
     int index = 0;
 
@@ -171,6 +198,12 @@ void array_insertion_sort(int array[], int N) {
 ////////////////////////////////////////////////////////////////
 
 void array_quick_sort(int array[], int N) {
+
+    /*
+     * Worst case time complexity: O(N^2)
+     * Average case time complexity: O(N)
+     * Best case time complexity: O(N)
+     */
 
     if (N <= 1) {
         return;
@@ -211,6 +244,12 @@ void array_quick_sort(int array[], int N) {
 ////////////////////////////////////////////////////////////////
 
 void array_merge_sort(int array[], int N) {
+
+    /*
+     * Worst case time complexity: O(N^2)
+     * Average case time complexity: O(N)
+     * Best case time complexity: O(N)
+     */
 
     // base case
     if (N == 1) {

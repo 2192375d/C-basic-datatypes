@@ -1,14 +1,6 @@
-#ifndef LINKED_LIST_C
-#define LINKED_LIST_C
-
 #include "linkedList.h"
 #include "stdio.h"
 #include "stdlib.h"
-
-typedef struct linked_list_node_struct {
-    int value;
-    struct linked_list_node_struct *next;
-} linked_list_node;
 
 ////////////////////////////////////////////////////////////////
 
@@ -193,53 +185,46 @@ linked_list_node *linked_list_search(linked_list_node *head,
 
 ////////////////////////////////////////////////////////////////
 
-linked_list_node *linked_list_sort(linked_list_node *head);
+linked_list_node *linked_list_insert_end(linked_list_node *head, int value) {
+
+    while (head != NULL) {
+        head = head->next;
+    }
+
+    head = linked_list_node_create_valued(value);
+    return head;
+}
 
 ////////////////////////////////////////////////////////////////
-/*____________________________________________________________*/
 
-linked_list_node *enqueue(linked_list_node *head, int value) {
+linked_list_node *linked_list_delete_end(linked_list_node *head) {
 
+    if (head == NULL) {
+        return head;
+    }
+
+    linked_list_node *p = head;
+
+    while (p->next != NULL) {
+        p = p->next;
+    }
+
+    free(p);
+    return head;
+}
+
+////////////////////////////////////////////////////////////////
+
+linked_list_node *array_to_linked_list(int array[], int N) {
     /*
-     * insert the input value at the end of the linked list
+     * Takes an input array, a return it's linked list representation
      */
 
-    // if (head == NULL) {
-    //     head = linked_list_node_create();
-    //     head->value = value;
-    //     return head;
-    // }
-    //
-    // linked_list_node *temp = head;
-    // while (temp->next != NULL) {
-    //     temp = temp->next;
-    // }
-    //
-    // temp->next = linked_list_node_create();
-    // temp->next->value = value;
-    //
-    // return head;
+    linked_list_node *output = NULL;
+    for (int i = 0; i < N; i++) {
 
-    head = linked_list_insert_count(head, linked_list_node_create_valued(value),
-                                    linked_list_length(head));
-    return head;
+        output = linked_list_insert_end(output, array[i]);
+    }
+
+    return output;
 }
-
-/*____________________________________________________________*/
-
-linked_list_node *dequeue(linked_list_node *head) {
-
-    head = linked_list_delete_count(head, 0);
-    return head;
-
-    // if (head == NULL) {
-    //     return NULL;
-    // }
-    //
-    // linked_list_node *temp = head->next;
-    // free(head);
-    // return temp;
-}
-
-/*____________________________________________________________*/
-#endif

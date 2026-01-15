@@ -1,7 +1,8 @@
 #include "array.h"
 #include "bst.h"
 #include "graph.h"
-// #include "linkedList.h"
+#include "linkedList.h"
+// #include "number-application.h"
 #include "stdio.h"
 #include "stdlib.h"
 #define N 10
@@ -23,6 +24,7 @@ void test_API_linked_list() {}
 
 void test_API_bst() {
     bst_node *root = (void *)0x0;
+    linked_list_node *head = NULL;
     root = bst_node_insert(root, 3);
     root = bst_node_insert(root, -4);
     root = bst_node_insert(root, -2);
@@ -35,13 +37,9 @@ void test_API_bst() {
     bst_inorder_print(root);
     printf("\n");
 
-    root = bst_node_delete(root, 5);
-    bst_inorder_print(root);
-    printf("\n");
+    head = bst_to_sorted_linked_list(root, head);
 
-    root = bst_delete(root);
-    bst_inorder_print(root);
-    printf("\n");
+    linked_list_print(head);
 }
 
 void test_API_graph() {
@@ -70,7 +68,25 @@ void test_API_graph() {
     matrix = graph_list_to_matrix(g);
 }
 
+void test_API_number_application() {
+
+    int input_array[14] = {1, 2, 0, 3, 10, 11, 16, 15, 21, 19, 20, 3, 1, 2};
+
+    linked_list_node *input = array_to_linked_list(input_array, 14);
+    linked_list_node *output = NULL;
+
+    output = number_ternary_conversion(25, 31, input);
+
+    linked_list_print(output);
+}
+
+// void temp(){
+//
+// }
+
 int main() {
-    printf("hello world\n");
+
+    test_API_bst();
+
     return 0;
 }

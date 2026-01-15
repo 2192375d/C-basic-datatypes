@@ -1,16 +1,14 @@
 #include "bst.h"
+// #include "linkedList.h"
 #include "stdio.h"
 #include "stdlib.h"
 
-typedef struct bst_node_struct {
-    int value;
-    struct bst_node_struct *left;
-    struct bst_node_struct *right;
-} bst_node;
+////////////////////////////////////////////////////////////////
 
-// initiate a node, with value 0, if no space available then print stuff
 bst_node *bst_node_create() {
 
+    // initiate a node, with value 0, if no space available then leaves a
+    // warning
     bst_node *node = (bst_node *)calloc(1, sizeof(bst_node));
 
     if (node == NULL) {
@@ -20,12 +18,14 @@ bst_node *bst_node_create() {
     return node;
 }
 
-/*
- * The function takes the root of a bst and inserts node in it.
- * If node already exists, the function does nothing and returns the root
- * without any changes
- */
+////////////////////////////////////////////////////////////////
+
 bst_node *bst_node_insert(bst_node *root, int value) {
+    /*
+     * The function takes the root of a bst and inserts node in it.
+     * If node already exists, the function does nothing and returns the root
+     * without any changes
+     */
 
     bst_node *temp = NULL;
 
@@ -46,8 +46,14 @@ bst_node *bst_node_insert(bst_node *root, int value) {
     return root;
 }
 
-// title
+////////////////////////////////////////////////////////////////
+
 void bst_preorder_print(bst_node *root) {
+
+    /*
+     * Print the input bst using preorder traversal
+     */
+
     if (root == NULL) {
         return;
     }
@@ -57,8 +63,13 @@ void bst_preorder_print(bst_node *root) {
     bst_preorder_print(root->right);
 }
 
-// title
+////////////////////////////////////////////////////////////////
+
 void bst_inorder_print(bst_node *root) {
+    /*
+     * Print the input bst using inorder traversal (smallest to greatest)
+     */
+
     if (root == NULL) {
         return;
     }
@@ -68,8 +79,13 @@ void bst_inorder_print(bst_node *root) {
     bst_inorder_print(root->right);
 }
 
-// title
+////////////////////////////////////////////////////////////////
+
 void bst_postorder_print(bst_node *root) {
+    /*
+     * Print the input bst using postorder traversal
+     */
+
     if (root == NULL) {
         return;
     }
@@ -79,8 +95,13 @@ void bst_postorder_print(bst_node *root) {
     printf("%d ", root->value);
 }
 
-// deletes the node with the given value, if not in the list, then does nothing
+////////////////////////////////////////////////////////////////
+
 bst_node *bst_node_delete(bst_node *root, int value) {
+    /*
+     * deletes the node with the given value, if not in the list, then does
+     * nothing
+     */
 
     if (root == NULL) {
         return NULL;
@@ -127,8 +148,15 @@ bst_node *bst_node_delete(bst_node *root, int value) {
     return root;
 }
 
-// deletes the entire bst, return NULL
+////////////////////////////////////////////////////////////////
+
 bst_node *bst_delete(bst_node *root) {
+    /*
+     * Delete the entire bst, and return the position of the (already
+     * deallocated) input address
+     *
+     * (done through postorder traversal)
+     */
 
     if (root == NULL) {
         return NULL;
@@ -137,25 +165,31 @@ bst_node *bst_delete(bst_node *root) {
     root->right = bst_delete(root->right);
 
     free(root);
-    return NULL;
+    return root;
 }
 
-/*
- * finds the node with given value, return it
- * if note in the list, return NULL
- */
-bst_node *bst_search(bst_node *head, int value) {
+////////////////////////////////////////////////////////////////
 
-    if (head == NULL) {
+bst_node *bst_search(bst_node *root, int value) {
+    /*
+     * finds the node with given value, return it if note in the list, return
+     * NULL
+     */
+
+    if (root == NULL) {
         return NULL;
     }
 
-    if (value < head->value) {
-        return bst_search(head->left, value);
+    if (value < root->value) {
+        return bst_search(root->left, value);
     }
-    if (value > head->value) {
-        return bst_search(head->right, value);
+    if (value > root->value) {
+        return bst_search(root->right, value);
     }
 
-    return head;
+    return root;
 }
+
+////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////

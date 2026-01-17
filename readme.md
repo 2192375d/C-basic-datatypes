@@ -8,4 +8,4 @@ The motivation came from me having to rewrite the exact same code all the time, 
 - Use some advanced pointer stuffs to allow this to work for any datatype
 - Complete the to be done stuffs, and make everything more complete
 - Fix bugs (if found any)
-- Add a make file
+- ~~Add a make file~~

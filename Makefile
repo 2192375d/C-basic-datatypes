@@ -1,8 +1,7 @@
-
 CC := gcc
 CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -O2
 
-SRC := array.c linkedList.c bst.c graph.c tests.c
+SRC := array.c linkedList.c bst.c avl.c graph.c utils.c tests.c
 OUT := tests
 
 all: $(OUT)
@@ -15,3 +14,5 @@ run: $(OUT)
 
 clean:
 	rm -f $(OUT)
+
+Command to build:

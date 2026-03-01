@@ -1,7 +1,8 @@
 #include "array.h"
+#include "avl.h"
 #include "bst.h"
 #include "graph.h"
-#include "linkedList.h"
+// #include "linkedList.h"
 // #include "number-application.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -24,7 +25,7 @@ void test_linked_list_library() {}
 
 void test_bst_library() {
     bst_node *root = (void *)0x0;
-    linked_list_node *head = NULL;
+    // linked_list_node *head = NULL;
     root = bst_node_insert(root, 3);
     root = bst_node_insert(root, -4);
     root = bst_node_insert(root, -2);
@@ -69,13 +70,33 @@ void test_grpah_library() {
     (void)matrix;
 }
 
-// void temp(){
-//
-// }
+void test_avl_library() {
+    avl_node *root = NULL;
+    root = avl_node_create_valued(5);
+    root = avl_node_insert(root, 7);
+    root = avl_node_insert(root, 2);
+    root = avl_node_insert(root, 3);
+    root = avl_node_insert(root, -1);
+    root = avl_node_insert(root, 9);
+    root = avl_node_insert(root, 11);
+    root = avl_node_insert(root, -3);
+
+    avl_preorder_print(root);
+    printf("\n");
+
+    avl_inorder_print(root);
+    printf("\n");
+
+    avl_postorder_print(root);
+    printf("\n");
+
+    bst_node *node = (bst_node *)root;
+    bst_display(node, 0);
+}
 
 int main() {
 
-    test_bst_library();
+    test_avl_library();
 
     return 0;
 }

@@ -33,15 +33,19 @@ void bst_inorder_print(bst_node *root);
 
 void bst_postorder_print(bst_node *root);
 
+void bst_display(bst_node *root, int depth);
+
 bst_node *bst_node_delete(bst_node *root, int value);
 
 bst_node *bst_delete(bst_node *root);
 
 bst_node *bst_search(bst_node *root, int value);
 
-// those two are still work in progress
-linked_list_node *bst_to_sorted_linked_list(bst_node *root,
-                                            linked_list_node *head);
+int bst_height(bst_node *root);
 
-bst_node *bst_get_balanced_bst(bst_node *root);
+// those two are still work in progress
+// linked_list_node *bst_to_sorted_linked_list(bst_node *root,
+// linked_list_node *head);
+
+// bst_node *bst_get_balanced_bst(bst_node *root);
 #endif

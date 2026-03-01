@@ -1,7 +1,7 @@
 CC := gcc
 CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -O2
 
-SRC := array.c linkedList.c bst.c avl.c graph.c utils.c tests.c
+SRC := src/array.c src/linkedList.c src/bst.c src/avl.c src/graph.c src/utils.c src/tests.c
 OUT := tests
 
 all: $(OUT)

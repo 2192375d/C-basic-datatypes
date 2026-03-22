@@ -7,7 +7,7 @@ OUT = tests
 all: $(OUT)
 
 $(OUT): $(SRC)
-	gcc $(CFLAGS) $(SRC) -o
+	gcc $(CFLAGS) $(SRC) -o $(OUT)
 
 run: $(OUT)
 	./$(OUT)

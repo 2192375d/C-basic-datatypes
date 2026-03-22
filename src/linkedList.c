@@ -17,19 +17,18 @@ linked_list_node *linked_list_node_create() {
         fprintf(stderr,
                 "linked_list_node_create(): no more space to allocate more "
                 "nodes\n");
+        return NULL;
     }
 
     new->value = NULL;
     new->print = NULL;
-    new->free = NULL;
 
     return new;
 }
 
 ////////////////////////////////////////////////////////////////
 
-linked_list_node *linked_list_node_create_valued(void *value, print_fn print,
-                                                 free_fn free) {
+linked_list_node *linked_list_node_create_valued(void *value, print_fn print) {
     /*
      * create and return a new node for linked list, with given value "value"
      * assigned. if no space available, the function outputs a message and
@@ -39,7 +38,6 @@ linked_list_node *linked_list_node_create_valued(void *value, print_fn print,
     linked_list_node *new_node = linked_list_node_create();
     new_node->value = value;
     new_node->print = print;
-    new_node->free = free;
 
     return new_node;
 }
@@ -99,7 +97,7 @@ void linked_list_node_print(linked_list_node *node) {
      * Print the current node
      */
 
-    node->print(node->value);
+    node->print(node);
 }
 
 ////////////////////////////////////////////////////////////////
@@ -130,7 +128,7 @@ linked_list_node *linked_list_delete(linked_list_node *head) {
 
     while (head != NULL) {
         temp = head->next;
-        head->free(head);
+        free(head);
         head = temp;
     }
 
@@ -150,7 +148,7 @@ linked_list_node *linked_list_delete_count(linked_list_node *head, int count) {
 
     if (count == 0) {
         linked_list_node *next = head->next;
-        head->free(head);
+        free(head);
         return next;
     }
 
@@ -167,7 +165,7 @@ linked_list_node *linked_list_delete_count(linked_list_node *head, int count) {
 
     linked_list_node *to_delete = temp->next;
     temp->next = to_delete->next;
-    to_delete->free(to_delete);
+    free(to_delete);
 
     return head;
 }
@@ -186,7 +184,7 @@ linked_list_node *linked_list_delete_end(linked_list_node *head) {
         p = p->next;
     }
 
-    p->free(p);
+    free(p);
     return head;
 }
 

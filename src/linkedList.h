@@ -22,15 +22,14 @@ typedef void (*free_fn)(struct linked_list_node_struct *);
 typedef struct linked_list_node_struct {
     void *value;
     print_fn print;
-    free_fn free;
+    // free_fn free;
     struct linked_list_node_struct *next;
 } linked_list_node;
 
 /*__________________create linked list node___________________*/
 linked_list_node *linked_list_node_create();
 
-linked_list_node *linked_list_node_create_valued(void *value, print_fn print,
-                                                 free_fn free);
+linked_list_node *linked_list_node_create_valued(void *value, print_fn print);
 
 /*__________________other linked list functionalities_________*/
 

@@ -12,3 +12,4 @@ The motivation came from me having to rewrite the exact same code all the time, 
 
 ## questions
 - how do I handle the print for `void *` type?
+- can I assume all `void *` pointers are pointing on something on the stack?

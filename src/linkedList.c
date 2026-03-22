@@ -14,26 +14,34 @@ linked_list_node *linked_list_node_create() {
         (linked_list_node *)calloc(1, sizeof(linked_list_node));
 
     if (new == NULL) {
-        printf("linked_list_node_create(): no more space to allocate more "
-               "nodes\n");
+        fprintf(stderr,
+                "linked_list_node_create(): no more space to allocate more "
+                "nodes\n");
     }
+
+    new->value = NULL;
+    new->print = NULL;
+    new->free = NULL;
 
     return new;
 }
 
 ////////////////////////////////////////////////////////////////
 
-linked_list_node *linked_list_node_create_valued(void *value) {
+linked_list_node *linked_list_node_create_valued(void *value, print_fn print,
+                                                 free_fn free) {
     /*
      * create and return a new node for linked list, with given value "value"
      * assigned. if no space available, the function outputs a message and
      * returns null
      */
 
-    linked_list_node *new = linked_list_node_create();
-    new->value = value;
+    linked_list_node *new_node = linked_list_node_create();
+    new_node->value = value;
+    new_node->print = print;
+    new_node->free = free;
 
-    return new;
+    return new_node;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -86,23 +94,23 @@ linked_list_node *linked_list_insert_count(linked_list_node *head,
 
 ////////////////////////////////////////////////////////////////
 
-void linked_list_node_print(linked_list_node *node, void (*print_fn)(void *)) {
+void linked_list_node_print(linked_list_node *node) {
     /*
      * Print the current node
      */
 
-    print_fn(node->value);
+    node->print(node->value);
 }
 
 ////////////////////////////////////////////////////////////////
 
-void linked_list_print(linked_list_node *head, void (*print_fn)(void *)) {
+void linked_list_print(linked_list_node *head) {
     /*
      * Print the entire linked list
      */
 
     while (head != NULL) {
-        linked_list_node_print(head, print_fn);
+        linked_list_node_print(head);
         head = head->next;
     }
 }
@@ -122,7 +130,7 @@ linked_list_node *linked_list_delete(linked_list_node *head) {
 
     while (head != NULL) {
         temp = head->next;
-        free(head);
+        head->free(head);
         head = temp;
     }
 
@@ -142,7 +150,7 @@ linked_list_node *linked_list_delete_count(linked_list_node *head, int count) {
 
     if (count == 0) {
         linked_list_node *next = head->next;
-        free(head);
+        head->free(head);
         return next;
     }
 
@@ -159,8 +167,26 @@ linked_list_node *linked_list_delete_count(linked_list_node *head, int count) {
 
     linked_list_node *to_delete = temp->next;
     temp->next = to_delete->next;
-    free(to_delete);
+    to_delete->free(to_delete);
 
+    return head;
+}
+
+////////////////////////////////////////////////////////////////
+///
+linked_list_node *linked_list_delete_end(linked_list_node *head) {
+
+    if (head == NULL) {
+        return head;
+    }
+
+    linked_list_node *p = head;
+
+    while (p->next != NULL) {
+        p = p->next;
+    }
+
+    p->free(p);
     return head;
 }
 
@@ -199,30 +225,15 @@ int linked_list_search_value(linked_list_node *head, void *value) {
 
 ////////////////////////////////////////////////////////////////
 
-linked_list_node *linked_list_insert_end(linked_list_node *head, void *value) {
-
-    while (head != NULL) {
-        head = head->next;
-    }
-
-    head = linked_list_node_create_valued(value);
-    return head;
-}
+// linked_list_node *linked_list_insert_end(linked_list_node *head, void *value)
+// {
+//
+//     while (head != NULL) {
+//         head = head->next;
+//     }
+//
+//     head = linked_list_node_create_valued(value);
+//     return head;
+// }
 
 ////////////////////////////////////////////////////////////////
-
-linked_list_node *linked_list_delete_end(linked_list_node *head) {
-
-    if (head == NULL) {
-        return head;
-    }
-
-    linked_list_node *p = head;
-
-    while (p->next != NULL) {
-        p = p->next;
-    }
-
-    free(p);
-    return head;
-}

@@ -14,15 +14,23 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+struct linked_list_node_struct;
+
+typedef void (*print_fn)(struct linked_list_node_struct *);
+typedef void (*free_fn)(struct linked_list_node_struct *);
+
 typedef struct linked_list_node_struct {
     void *value;
+    print_fn print;
+    free_fn free;
     struct linked_list_node_struct *next;
 } linked_list_node;
 
 /*__________________create linked list node___________________*/
 linked_list_node *linked_list_node_create();
 
-linked_list_node *linked_list_node_create_valued(void *value);
+linked_list_node *linked_list_node_create_valued(void *value, print_fn print,
+                                                 free_fn free);
 
 /*__________________other linked list functionalities_________*/
 
@@ -37,12 +45,13 @@ int linked_list_search_value(linked_list_node *head, void *value);
 linked_list_node *linked_list_insert_count(linked_list_node *head,
                                            linked_list_node *node, int count);
 
-linked_list_node *linked_list_insert_end(linked_list_node *head, void *value);
+// linked_list_node *linked_list_insert_end(linked_list_node *head, void
+// *value);
 
 /*__________________print linked list node___________________*/
-void linked_list_node_print(linked_list_node *node, void (*print_fn)(void *));
+void linked_list_node_print(linked_list_node *node);
 
-void linked_list_print(linked_list_node *head, void (*print_fn)(void *));
+void linked_list_print(linked_list_node *head);
 
 /*__________________delete linked list node___________________*/
 linked_list_node *linked_list_delete(linked_list_node *head);

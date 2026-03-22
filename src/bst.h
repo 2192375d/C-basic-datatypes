@@ -14,18 +14,22 @@
 #ifndef BST_H
 #define BST_H
 
-#include "linkedList.h"
+// #include "linkedList.h"
+
+typedef void (*print_fn)(struct linked_list_node_struct *);
+
 typedef struct bst_node_struct {
     void *value;
+    print_fn print;
     struct bst_node_struct *left;
     struct bst_node_struct *right;
 } bst_node;
 
 bst_node *bst_node_create();
 
-bst_node *bst_node_create_valued(int value);
+bst_node *bst_node_create_valued(void *value);
 
-bst_node *bst_node_insert(bst_node *root, int value);
+bst_node *bst_node_insert(bst_node *root, void *value);
 
 void bst_preorder_print(bst_node *root);
 

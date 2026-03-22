@@ -183,6 +183,7 @@ linked_list_node *linked_list_delete_end(linked_list_node *head) {
     if (p->next == NULL) {
         free(p->next);
         p->next = NULL;
+        return head;
     }
 
     while (p->next->next != NULL) {

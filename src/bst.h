@@ -37,7 +37,7 @@ void bst_inorder_print(bst_node *root);
 
 void bst_postorder_print(bst_node *root);
 
-void bst_display(bst_node *root, int depth);
+// void bst_display(bst_node *root, int depth);
 
 bst_node *bst_node_delete(bst_node *root, int value);
 

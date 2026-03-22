@@ -17,10 +17,12 @@
 struct linked_list_node_struct;
 
 typedef void (*print_fn)(struct linked_list_node_struct *);
+typedef int (*cmp_fn)(void *, void *); // 0 for equal
 
 typedef struct linked_list_node_struct {
     void *value;
     print_fn print;
+    cmp_fn compare;
     // free_fn free;
     struct linked_list_node_struct *next;
 } linked_list_node;

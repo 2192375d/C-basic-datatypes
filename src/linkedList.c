@@ -204,7 +204,7 @@ linked_list_node *linked_list_search(linked_list_node *head,
      * returns the target node's address. NULL if not present
      */
     while (head != NULL) {
-        if (head->value == target->value) {
+        if (head->compare(head->value, target->value) == 0) {
             return head;
         }
 
@@ -218,7 +218,7 @@ int linked_list_search_value(linked_list_node *head, void *value) {
 
     int count = 0;
     while (head != NULL) {
-        if (head->value == value) {
+        if (head->compare(head->value, value) == 0) {
             return count;
         }
         count++;

@@ -15,14 +15,14 @@
 #define LINKEDLIST_H
 
 typedef struct linked_list_node_struct {
-    int value;
+    void *value;
     struct linked_list_node_struct *next;
 } linked_list_node;
 
 /*__________________create linked list node___________________*/
 linked_list_node *linked_list_node_create();
 
-linked_list_node *linked_list_node_create_valued(int value);
+linked_list_node *linked_list_node_create_valued(void *value);
 
 /*__________________other linked list functionalities_________*/
 
@@ -33,13 +33,13 @@ int linked_list_length(linked_list_node *head);
 linked_list_node *linked_list_search(linked_list_node *head,
                                      linked_list_node *target);
 
-int linked_list_search_value(linked_list_node *head, int value);
+int linked_list_search_value(linked_list_node *head, void *value);
 
 /*__________________insert linked list node___________________*/
 linked_list_node *linked_list_insert_count(linked_list_node *head,
                                            linked_list_node *node, int count);
 
-linked_list_node *linked_list_insert_end(linked_list_node *head, int value);
+linked_list_node *linked_list_insert_end(linked_list_node *head, void *value);
 
 /*__________________print linked list node___________________*/
 
@@ -51,8 +51,5 @@ linked_list_node *linked_list_delete(linked_list_node *head);
 linked_list_node *linked_list_delete_count(linked_list_node *head, int count);
 
 linked_list_node *linked_list_delete_end(linked_list_node *head);
-
-/*__________________linked list and other datatype___________*/
-linked_list_node *array_to_linked_list(int array[], int N);
 
 #endif

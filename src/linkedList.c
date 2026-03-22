@@ -23,7 +23,7 @@ linked_list_node *linked_list_node_create() {
 
 ////////////////////////////////////////////////////////////////
 
-linked_list_node *linked_list_node_create_valued(int value) {
+linked_list_node *linked_list_node_create_valued(void *value) {
     /*
      * create and return a new node for linked list, with given value "value"
      * assigned. if no space available, the function outputs a message and
@@ -183,7 +183,7 @@ linked_list_node *linked_list_search(linked_list_node *head,
     return NULL;
 }
 
-int linked_list_search_value(linked_list_node *head, int value) {
+int linked_list_search_value(linked_list_node *head, void *value) {
 
     int count = 0;
     while (head != NULL) {
@@ -199,7 +199,7 @@ int linked_list_search_value(linked_list_node *head, int value) {
 
 ////////////////////////////////////////////////////////////////
 
-linked_list_node *linked_list_insert_end(linked_list_node *head, int value) {
+linked_list_node *linked_list_insert_end(linked_list_node *head, void *value) {
 
     while (head != NULL) {
         head = head->next;
@@ -225,20 +225,4 @@ linked_list_node *linked_list_delete_end(linked_list_node *head) {
 
     free(p);
     return head;
-}
-
-////////////////////////////////////////////////////////////////
-
-linked_list_node *array_to_linked_list(int array[], int N) {
-    /*
-     * Takes an input array, a return it's linked list representation
-     */
-
-    linked_list_node *output = NULL;
-    for (int i = 0; i < N; i++) {
-
-        output = linked_list_insert_end(output, array[i]);
-    }
-
-    return output;
 }

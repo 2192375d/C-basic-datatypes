@@ -17,7 +17,6 @@
 struct linked_list_node_struct;
 
 typedef void (*print_fn)(struct linked_list_node_struct *);
-typedef void (*free_fn)(struct linked_list_node_struct *);
 
 typedef struct linked_list_node_struct {
     void *value;

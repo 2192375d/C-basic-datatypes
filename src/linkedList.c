@@ -180,11 +180,17 @@ linked_list_node *linked_list_delete_end(linked_list_node *head) {
 
     linked_list_node *p = head;
 
-    while (p->next != NULL) {
+    if (p->next == NULL) {
+        free(p->next);
+        p->next = NULL;
+    }
+
+    while (p->next->next != NULL) {
         p = p->next;
     }
 
-    free(p);
+    free(p->next);
+    p->next = NULL;
     return head;
 }
 

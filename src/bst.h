@@ -16,7 +16,7 @@
 
 #include "linkedList.h"
 typedef struct bst_node_struct {
-    int value;
+    void *value;
     struct bst_node_struct *left;
     struct bst_node_struct *right;
 } bst_node;

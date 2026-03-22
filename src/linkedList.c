@@ -183,6 +183,20 @@ linked_list_node *linked_list_search(linked_list_node *head,
     return NULL;
 }
 
+int linked_list_search_value(linked_list_node *head, int value) {
+
+    int count = 0;
+    while (head != NULL) {
+        if (head->value == value) {
+            return count;
+        }
+        count++;
+        head = head->next;
+    }
+
+    return -1;
+}
+
 ////////////////////////////////////////////////////////////////
 
 linked_list_node *linked_list_insert_end(linked_list_node *head, int value) {

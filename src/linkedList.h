@@ -33,11 +33,15 @@ int linked_list_length(linked_list_node *head);
 linked_list_node *linked_list_search(linked_list_node *head,
                                      linked_list_node *target);
 
+int linked_list_search_value(linked_list_node *head, int value);
+
 /*__________________insert linked list node___________________*/
 linked_list_node *linked_list_insert_count(linked_list_node *head,
                                            linked_list_node *node, int count);
 
 linked_list_node *linked_list_insert_end(linked_list_node *head, int value);
+
+/*__________________print linked list node___________________*/
 
 void linked_list_print(linked_list_node *head);
 

@@ -14,7 +14,19 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 
-typedef struct graph_struct graph;
+#include "linkedList.h"
+#include "stdbool.h"
+
+typedef struct edge_struct {
+    int src;
+    int dest;
+    int weight;
+} edge;
+
+typedef struct graph_struct {
+    int max_node;
+    linked_list_node **lists;
+} graph;
 
 /*__________________adjacency list operations_________________*/
 graph *graph_list_add_edge(graph *g, int src, int dest);
@@ -25,16 +37,20 @@ void graph_list_print_bfs(graph *g, int start);
 
 void graph_list_print_dfs(graph *g, int start);
 
+bool graph_list_is_undirected(graph *g);
+
+// graph *graph_list_get_mst_kruskal(graph *g);
+
 /*__________________adjacency matrix operations_______________*/
 void graph_matrix_print_dfs(int **matrix, int start, int N);
 
 void graph_matrix_print_bfs(int **matrix, int start, int N);
 
+bool graph_matrix_is_undrected(int **matrix);
+
+edge *graph_matrix_get_edges(int **matrix, int N);
+
 /*__________________other operations__________________________*/
 int **graph_list_to_matrix(graph *g);
-
-// to be done...
-int graph_matrix_get_shortest_distance_dfs(int **matrix, int src, int dest,
-                                           int visited[], int N);
 
 #endif

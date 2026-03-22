@@ -232,3 +232,77 @@ avl_node *avl_search(avl_node *root, int value) {
 
     return root;
 }
+
+avl_node *avl_join(avl_node *left, int value, avl_node *right) {
+    avl_node *temp = NULL;
+    if (avl_height(left) - avl_height(right) > 1) {
+        temp = left;
+
+        while (avl_height(temp->right) - avl_height(right) > 1) {
+            temp = temp->right;
+        }
+        avl_node *new_node = avl_node_create_valued(value);
+        new_node->left = temp->right;
+        new_node->right = right;
+        rebalance(new_node);
+        update_height(new_node);
+        return left;
+    }
+    if (avl_height(left) - avl_height(right) < -1) {
+        temp = right;
+
+        while (avl_height(temp->left) - avl_height(left) > 1) {
+            temp = temp->left;
+        }
+        avl_node *new_node = avl_node_create_valued(value);
+        new_node->right = temp->left;
+        new_node->left = left;
+        rebalance(new_node);
+        update_height(new_node);
+        return right;
+    }
+    temp = avl_node_create_valued(value);
+    temp->left = left;
+    temp->right = right;
+    return temp;
+}
+
+avl_pair *avl_split(avl_node *root, int value) {
+
+    avl_pair *pair = (avl_pair *)calloc(sizeof(avl_pair), 1);
+    pair->first = NULL;
+    pair->second = NULL;
+    if (root == NULL) {
+        return pair;
+    }
+    if (value < root->value) {
+        pair = avl_split(root->left, value);
+        pair->second = avl_join(pair->second, root->value, root->right);
+        return pair;
+    }
+    if (value > root->value) {
+        pair = avl_split(root->right, value);
+        pair->first = avl_join(pair->first, root->value, root->left);
+        return pair;
+    }
+
+    pair->first = root->left;
+    pair->second = root->right;
+    return pair;
+}
+
+avl_node *avl_union(avl_node *root1, avl_node *root2) {
+    if (!root1) {
+        return root2;
+    }
+    if (!root2) {
+        return root1;
+    }
+
+    int value = root2->value;
+    avl_pair *pair = avl_split(root2, value);
+    avl_node *left = avl_union(pair->first, root2->left);
+    avl_node *right = avl_union(pair->second, root2->right);
+
+    return avl_join(left, value, right);
+}

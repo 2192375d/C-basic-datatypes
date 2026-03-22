@@ -9,3 +9,6 @@ The motivation came from me having to rewrite the exact same code all the time, 
 - Complete the to be done stuffs, and make everything more complete
 - Fix bugs (if found any)
 - ~~Add a make file~~
+
+## questions
+- how do I handle the print for `void *` type?

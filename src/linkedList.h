@@ -26,8 +26,6 @@ linked_list_node *linked_list_node_create_valued(void *value);
 
 /*__________________other linked list functionalities_________*/
 
-void linked_list_node_print(linked_list_node *node);
-
 int linked_list_length(linked_list_node *head);
 
 linked_list_node *linked_list_search(linked_list_node *head,
@@ -42,8 +40,9 @@ linked_list_node *linked_list_insert_count(linked_list_node *head,
 linked_list_node *linked_list_insert_end(linked_list_node *head, void *value);
 
 /*__________________print linked list node___________________*/
+void linked_list_node_print(linked_list_node *node, void (*print_fn)(void *));
 
-void linked_list_print(linked_list_node *head);
+void linked_list_print(linked_list_node *head, void (*print_fn)(void *));
 
 /*__________________delete linked list node___________________*/
 linked_list_node *linked_list_delete(linked_list_node *head);

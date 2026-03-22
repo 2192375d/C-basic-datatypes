@@ -86,23 +86,23 @@ linked_list_node *linked_list_insert_count(linked_list_node *head,
 
 ////////////////////////////////////////////////////////////////
 
-void linked_list_node_print(linked_list_node *node) {
+void linked_list_node_print(linked_list_node *node, void (*print_fn)(void *)) {
     /*
      * Print the current node
      */
 
-    printf("%d", node->value);
+    print_fn(node->value);
 }
 
 ////////////////////////////////////////////////////////////////
 
-void linked_list_print(linked_list_node *head) {
+void linked_list_print(linked_list_node *head, void (*print_fn)(void *)) {
     /*
      * Print the entire linked list
      */
 
     while (head != NULL) {
-        linked_list_node_print(head);
+        linked_list_node_print(head, print_fn);
         head = head->next;
     }
 }

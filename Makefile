@@ -1,13 +1,13 @@
-CC := gcc
-CFLAGS := -std=c11 -Wall -Wextra -Wpedantic -O2
+CC = gcc
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2
 
-SRC := src/array.c src/linkedList.c src/bst.c src/avl.c src/graph.c src/utils.c src/tests.c
-OUT := tests
+SRC = src/array.c src/linkedList.c src/bst.c src/avl.c src/graph.c src/utils.c src/tests.c
+OUT = tests
 
 all: $(OUT)
 
 $(OUT): $(SRC)
-	$(CC) $(CFLAGS) $(SRC) -o $(OUT)
+	gcc $(CFLAGS) $(SRC) -o
 
 run: $(OUT)
 	./$(OUT)

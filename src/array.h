@@ -16,10 +16,10 @@
 // prints the input array
 void array_print(int array[], int N);
 
-// returns the index of from the input array with the largest value
+// returns the index from the input array with the largest value
 int array_get_maximum_index(int array[], int N);
 
-// returns the index of from the input array with the smallest value
+// returns the index from the input array with the smallest value
 int array_get_minimum_index(int array[], int N);
 
 // print the matrix of N rows M columns, note that the matrix will look

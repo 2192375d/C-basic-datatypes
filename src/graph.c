@@ -3,11 +3,6 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-typedef struct graph_struct {
-    int max_node;
-    linked_list_node **lists;
-} graph;
-
 ////////////////////////////////////////////////////////////////
 
 graph *graph_list_create(int max_node) {
@@ -136,12 +131,43 @@ void graph_list_print_bfs(graph *g, int start) {
 }
 
 ////////////////////////////////////////////////////////////////
+
+bool graph_list_is_undirected(graph *g) {
+
+    for (int i = 0; i < g->max_node; i++) {
+        linked_list_node *node = g->lists[i];
+
+        while (node != NULL) {
+            if (linked_list_search_value(g->lists[node->value], i) < 0) {
+                return false;
+            }
+
+            node = node->next;
+        }
+    }
+
+    return true;
+}
+
+////////////////////////////////////////////////////////////////
+
+// graph *graph_list_get_mst_kruskal(graph *g) {
+//
+//     if (graph_list_is_undirected(g) == false) {
+//         printf("graph_list_get_mst_kruskal: input graph is not undirected");
+//         return NULL;
+//     }
+//
+//     return NULL;
+// }
+
+////////////////////////////////////////////////////////////////
 /*____________________________________________________________*/
 
 void graph_matrix_print_dfs_recursive(int **matrix, int current,
                                       _Bool visited[], int N) {
     /*
-     * prints a graph from adjacency matrix in bfs
+     * prints a graph from adjacency matrix in dfs
      */
 
     visited[current] = 1;
@@ -155,11 +181,11 @@ void graph_matrix_print_dfs_recursive(int **matrix, int current,
 
 /*____________________________________________________________*/
 ////////////////////////////////////////////////////////////////
-
-void graph_matrix_print_dfs(int **matrix, int start, int N) {
-    /*
-     * prints a graph from adjacency matrix in dfs
-     */
+void graph_matrix_print_dfs(
+    int **matrix, int start,
+    int N) { /*
+              * prints a graph from adjacency matrix in dfs
+              */
 
     _Bool visited[N];
 
@@ -200,6 +226,19 @@ void graph_matrix_print_bfs(int **matrix, int start, int N) {
 
         queue = linked_list_delete_count(queue, 0);
     }
+}
+
+bool graph_matrix_is_undirected(int **matrix, int N) {
+
+    for (int i = 0; i < N; i++) {
+        for (int j = i + 1; j < N; j++) {
+            if (matrix[i][j] != matrix[j][i]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 
 ////////////////////////////////////////////////////////////////

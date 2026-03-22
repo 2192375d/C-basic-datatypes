@@ -5,10 +5,10 @@
 
 /*____________________________________________________________*/
 
+/*
+ * The function swaps the two input parameters using pointers
+ */
 void swap(int *x, int *y) {
-    /*
-     * The function swaps the two input parameters using pointers
-     */
 
     int temp;
     temp = *x;
@@ -26,15 +26,15 @@ void swap(int *x, int *y) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * The function takes an input array, and prints it. Numbers are
+ * seperated by a space.
+ *
+ * For example:
+ *      array[5] = {1, 2, 3, 4, 5};
+ *      The ouput will be "1 2 3 4 5"
+ */
 void array_print(int array[], int N) {
-    /*
-     * The function takes an input array, and prints it. Numbers are
-     * seperated by a space.
-     *
-     * For example:
-     *      array[5] = {1, 2, 3, 4, 5};
-     *      The ouput will be "1 2 3 4 5"
-     */
 
     for (int i = 0; i < N; i++) {
         printf("%d ", array[i]);
@@ -43,11 +43,11 @@ void array_print(int array[], int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * Takes an input array and returns index with maximum value
+ * If array is empty, return -1
+ */
 int array_get_maximum_index(int array[], int N) {
-    /*
-     * Takes an input array and returns index with maximum value
-     * If array is empty, return -1
-     */
 
     if (N == 0) {
         return -1;
@@ -65,11 +65,11 @@ int array_get_maximum_index(int array[], int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * Takes an input array and returns index with minimum value
+ * If array is empty, return -1
+ */
 int array_get_minimum_index(int array[], int N) {
-    /*
-     * Takes an input array and returns index with minimum value
-     * If array is empty, return -1
-     */
 
     if (N == 0) {
         return -1;
@@ -87,19 +87,19 @@ int array_get_minimum_index(int array[], int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * The function takes an input N x M matrix, and prints it. Numbers are
+ * seperated by a space.
+ *
+ * For example:
+ *      matrix[2][5] = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}};
+ *      The ouput will be
+ *      1 2 3 4 5
+ *      6 7 8 9 10
+ * Note that the matrix will look misaligned due to occurences of values >
+ * 10 or negative sign stuffs
+ */
 void matrix_print(int **matrix, int N, int M) {
-    /*
-     * The function takes an input N x M matrix, and prints it. Numbers are
-     * seperated by a space.
-     *
-     * For example:
-     *      matrix[2][5] = {{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}};
-     *      The ouput will be
-     *      1 2 3 4 5
-     *      6 7 8 9 10
-     * Note that the matrix will look misaligned due to occurences of values >
-     * 10 or negative sign stuffs
-     */
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < M; j++) {
@@ -132,13 +132,13 @@ void array_constant_valued_get(int array[], int value, int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * Worst case time complexity: O(N^2)
+ * Average case time complexity: O(N^2)
+ * Best case time complexity: O(N) (array already sorted forward)
+ */
 void array_bubble_sort(int array[], int N) {
 
-    /*
-     * Worst case time complexity: O(N^2)
-     * Average case time complexity: O(N^2)
-     * Best case time complexity: O(N) (array already sorted forward)
-     */
     _Bool swapped = 1;
     for (int i = 0; i < N - 1 && swapped == 1; i++) {
         swapped = 0;
@@ -153,12 +153,12 @@ void array_bubble_sort(int array[], int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * All case time complexity: O(N^2)
+ * (Note that the time complexity is always fixed)
+ */
 void array_selection_sort(int array[], int N) {
 
-    /*
-     * All case time complexity: O(N^2)
-     * (Note that the time complexity is always fixed)
-     */
     int minimum_index = 0;
 
     for (int i = 0; i < N; i++) {
@@ -169,13 +169,13 @@ void array_selection_sort(int array[], int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * Worst case time complexity: O(N^2)
+ * Average case time complexity: O(N^2)
+ * Best case time complexity: O(N) (array already sorted forward)
+ */
 void array_insertion_sort(int array[], int N) {
 
-    /*
-     * Worst case time complexity: O(N^2)
-     * Average case time complexity: O(N^2)
-     * Best case time complexity: O(N) (array already sorted forward)
-     */
     int temp = 0;
     int index = 0;
 
@@ -195,13 +195,12 @@ void array_insertion_sort(int array[], int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * Worst case time complexity: O(N^2)
+ * Average case time complexity: O(N)
+ * Best case time complexity: O(N)
+ */
 void array_quick_sort(int array[], int N) {
-
-    /*
-     * Worst case time complexity: O(N^2)
-     * Average case time complexity: O(N)
-     * Best case time complexity: O(N)
-     */
 
     if (N <= 1) {
         return;
@@ -241,13 +240,12 @@ void array_quick_sort(int array[], int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * Worst case time complexity: O(N^2)
+ * Average case time complexity: O(N)
+ * Best case time complexity: O(N)
+ */
 void array_merge_sort(int array[], int N) {
-
-    /*
-     * Worst case time complexity: O(N^2)
-     * Average case time complexity: O(N)
-     * Best case time complexity: O(N)
-     */
 
     // base case
     if (N == 1) {
@@ -309,13 +307,13 @@ void array_merge_sort(int array[], int N) {
 
 ////////////////////////////////////////////////////////////////
 
+/*
+ * Takes an N by M input matrix, and dynamics allocate the matrix, and
+ * return it
+ *
+ * complexity N * M
+ */
 int **matrix_array_to_pointer(int N, int M, int matrix[N][M]) {
-    /*
-     * Takes an N by M input matrix, and dynamics allocate the matrix, and
-     * return it
-     *
-     * complexity N * M
-     */
 
     int **result_matrix = (int **)calloc(N, sizeof(int *));
     for (int i = 0; i < N; i++) {

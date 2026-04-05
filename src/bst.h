@@ -16,20 +16,23 @@
 
 // #include "linkedList.h"
 
-typedef void (*print_fn)(struct linked_list_node_struct *);
+struct bst_node_struct;
+
+typedef void (*print_fn)(struct bst_node_struct *);
 
 typedef struct bst_node_struct {
+    int key;
     void *value;
     print_fn print;
     struct bst_node_struct *left;
     struct bst_node_struct *right;
 } bst_node;
 
-bst_node *bst_node_create();
+bst_node *bst_node_create(int key);
 
-bst_node *bst_node_create_valued(void *value);
+bst_node *bst_node_create_valued(int key, void *value, print_fn print);
 
-bst_node *bst_node_insert(bst_node *root, void *value);
+bst_node *bst_node_insert(bst_node *root, int key, void *value, print_fn print);
 
 void bst_preorder_print(bst_node *root);
 
@@ -37,13 +40,13 @@ void bst_inorder_print(bst_node *root);
 
 void bst_postorder_print(bst_node *root);
 
-// void bst_display(bst_node *root, int depth);
+void bst_display(bst_node *root, int depth); // should work with integer only...
 
-bst_node *bst_node_delete(bst_node *root, int value);
+bst_node *bst_node_delete(bst_node *root, int key);
 
 bst_node *bst_delete(bst_node *root);
 
-bst_node *bst_search(bst_node *root, int value);
+bst_node *bst_search(bst_node *root, int key);
 
 int bst_height(bst_node *root);
 

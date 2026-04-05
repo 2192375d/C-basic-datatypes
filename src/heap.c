@@ -51,15 +51,5 @@ int extract_max(heap *heap) {
         }
     }
 
-    // while (2 * index <= heap->count) {
-    //     if (heap->values[2 * index] > heap->values[2 * index + 1]) {
-    //         heap->values[index] = heap->values[2 * index];
-    //         index = 2 * index;
-    //     } else {
-    //         heap->values[index] = heap->values[2 * index + 1];
-    //         index = 2 * index + 1;
-    //     }
-    // }
-
     return max;
 }

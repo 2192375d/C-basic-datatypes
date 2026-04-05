@@ -1,4 +1,4 @@
-#include "linkedList.h"
+#include "./linked_list.h"
 #include "stdio.h"
 #include "stdlib.h"
 
@@ -21,14 +21,13 @@ linked_list_node *linked_list_node_create() {
     }
 
     new->value = NULL;
-    new->print = NULL;
 
     return new;
 }
 
 ////////////////////////////////////////////////////////////////
 
-linked_list_node *linked_list_node_create_valued(void *value, print_fn print) {
+linked_list_node *linked_list_node_create_valued(void *value) {
     /*
      * create and return a new node for linked list, with given value "value"
      * assigned. if no space available, the function outputs a message and
@@ -37,7 +36,6 @@ linked_list_node *linked_list_node_create_valued(void *value, print_fn print) {
 
     linked_list_node *new_node = linked_list_node_create();
     new_node->value = value;
-    new_node->print = print;
 
     return new_node;
 }
@@ -92,23 +90,23 @@ linked_list_node *linked_list_insert_count(linked_list_node *head,
 
 ////////////////////////////////////////////////////////////////
 
-void linked_list_node_print(linked_list_node *node) {
+void linked_list_node_print(linked_list_node *node, print_fn print) {
     /*
      * Print the current node
      */
 
-    node->print(node);
+    print(node->value);
 }
 
 ////////////////////////////////////////////////////////////////
 
-void linked_list_print(linked_list_node *head) {
+void linked_list_print(linked_list_node *head, print_fn print) {
     /*
      * Print the entire linked list
      */
 
     while (head != NULL) {
-        linked_list_node_print(head);
+        linked_list_node_print(head, print);
         head = head->next;
     }
 }
@@ -172,53 +170,36 @@ linked_list_node *linked_list_delete_count(linked_list_node *head, int count) {
 
 ////////////////////////////////////////////////////////////////
 ///
-linked_list_node *linked_list_delete_end(linked_list_node *head) {
-
-    if (head == NULL) {
-        return head;
-    }
-
-    linked_list_node *p = head;
-
-    if (p->next == NULL) {
-        free(p->next);
-        p->next = NULL;
-        return head;
-    }
-
-    while (p->next->next != NULL) {
-        p = p->next;
-    }
-
-    free(p->next);
-    p->next = NULL;
-    return head;
-}
+// linked_list_node *linked_list_delete_end(linked_list_node *head) {
+//
+//     if (head == NULL) {
+//         return head;
+//     }
+//
+//     linked_list_node *p = head;
+//
+//     if (p->next == NULL) {
+//         free(p->next);
+//         p->next = NULL;
+//         return head;
+//     }
+//
+//     while (p->next->next != NULL) {
+//         p = p->next;
+//     }
+//
+//     free(p->next);
+//     p->next = NULL;
+//     return head;
+// }
 
 ////////////////////////////////////////////////////////////////
 
-linked_list_node *linked_list_search(linked_list_node *head,
-                                     linked_list_node *target) {
-
-    /*
-     * returns the target node's address. NULL if not present
-     */
-    while (head != NULL) {
-        if (head->compare(head->value, target->value) == 0) {
-            return head;
-        }
-
-        head = head->next;
-    }
-
-    return NULL;
-}
-
-int linked_list_search_value(linked_list_node *head, void *value) {
+int linked_list_search(linked_list_node *head, void *value, cmp_fn cmp) {
 
     int count = 0;
     while (head != NULL) {
-        if (head->compare(head->value, value) == 0) {
+        if (cmp(head->value, value) == 0) {
             return count;
         }
         count++;

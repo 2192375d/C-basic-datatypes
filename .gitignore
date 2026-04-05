@@ -1,4 +1,5 @@
 *.o
 tests
 a.out
+doxygen
 EOF

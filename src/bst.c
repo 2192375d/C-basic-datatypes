@@ -6,38 +6,39 @@
 
 ////////////////////////////////////////////////////////////////
 
-bst_node *bst_node_create() {
+bst_node *bst_node_create(int key) {
 
     // initiate a node, with value 0, if no space available then leaves a
     // warning
     bst_node *node = (bst_node *)calloc(1, sizeof(bst_node));
 
     if (node == NULL) {
-        printf("bst_node_create(): not enough space to create new node\n");
+        perror("bst_node_create(): not enough space to create new node\n");
+        return NULL;
     }
+
+    node->key = key;
 
     return node;
 }
 
 ////////////////////////////////////////////////////////////////
 
-bst_node *bst_node_create_valued(int value) {
+bst_node *bst_node_create_valued(int key, void *value, print_fn print) {
 
     // initiate a node, with value 0, if no space available then leaves a
     // warning
-    bst_node *node = (bst_node *)calloc(1, sizeof(bst_node));
-
-    if (node == NULL) {
-        printf("bst_node_create(): not enough space to create new node\n");
-    }
+    bst_node *node = bst_node_create(key);
     node->value = value;
+    node->print = print;
 
     return node;
 }
 
 ////////////////////////////////////////////////////////////////
 
-bst_node *bst_node_insert(bst_node *root, int value) {
+bst_node *bst_node_insert(bst_node *root, int key, void *value,
+                          print_fn print) {
     /*
      * The function takes the root of a bst and inserts node in it.
      * If node already exists, the function does nothing and returns the root
@@ -47,20 +48,21 @@ bst_node *bst_node_insert(bst_node *root, int value) {
     bst_node *temp = NULL;
 
     if (root == NULL) {
-        temp = bst_node_create_valued(value);
+        temp = bst_node_create_valued(key, value, print);
         return temp;
     }
 
-    if (root->value == value) {
-        printf("bst_node_insert: No duplicated node allowed to insert\n");
+    if (root->key == key) {
+        fprintf(stderr,
+                "bst_node_insert: No duplicated node allowed to insert\n");
     }
 
-    if (root->value > value) {
-        root->left = bst_node_insert(root->left, value);
+    if (root->key > key) {
+        root->left = bst_node_insert(root->left, key, value, print);
     }
 
-    if (root->value < value) {
-        root->right = bst_node_insert(root->right, value);
+    if (root->key < key) {
+        root->right = bst_node_insert(root->right, key, value, print);
     }
 
     return root;
@@ -78,7 +80,7 @@ void bst_preorder_print(bst_node *root) {
         return;
     }
 
-    printf("%d ", root->value);
+    root->print(root);
     bst_preorder_print(root->left);
     bst_preorder_print(root->right);
 }
@@ -95,7 +97,7 @@ void bst_inorder_print(bst_node *root) {
     }
 
     bst_inorder_print(root->left);
-    printf("%d ", root->value);
+    root->print(root);
     bst_inorder_print(root->right);
 }
 
@@ -112,15 +114,18 @@ void bst_postorder_print(bst_node *root) {
 
     bst_postorder_print(root->left);
     bst_postorder_print(root->right);
-    printf("%d ", root->value);
+    root->print(root);
 }
 
 ////////////////////////////////////////////////////////////////
 
 void bst_display(bst_node *node, int depth) {
-    if (node == NULL)
-        return;
 
+    // assert(sizeof(node->value) == sizeof(int));
+
+    if (node == NULL) {
+        return;
+    }
     // Print right subtree first
     bst_display(node->right, depth + 1);
 
@@ -129,7 +134,7 @@ void bst_display(bst_node *node, int depth) {
         putchar(' ');
     }
 
-    printf("%d\n", node->value);
+    node->print(node);
 
     // Print left subtree
     bst_display(node->left, depth + 1);
@@ -137,20 +142,20 @@ void bst_display(bst_node *node, int depth) {
 
 ////////////////////////////////////////////////////////////////
 
-bst_node *bst_node_delete(bst_node *root, int value) {
+bst_node *bst_node_delete(bst_node *root, int key) {
     /*
      * deletes the node with the given value, if not in the list, then does
      * nothing
      */
 
     if (root == NULL) {
-        printf("bst_node_delete: target node not found");
+        perror("bst_node_delete: target node not found");
         return NULL;
     }
 
     bst_node *temp = NULL;
 
-    if (root->value == value) {
+    if (root->key == key) {
         if (root->left == NULL && root->right == NULL) {
             free(root);
             return NULL;
@@ -175,15 +180,17 @@ bst_node *bst_node_delete(bst_node *root, int value) {
             temp = temp->left;
         }
 
+        root->key = temp->key;
         root->value = temp->value;
-        root->right = bst_node_delete(root->right, temp->value);
+        root->print = temp->print;
+        root->right = bst_node_delete(root->right, temp->key);
         return root;
     }
 
-    if (value < root->value) {
-        root->left = bst_node_delete(root->left, value);
+    if (key < root->key) {
+        root->left = bst_node_delete(root->left, key);
     } else {
-        root->right = bst_node_delete(root->right, value);
+        root->right = bst_node_delete(root->right, key);
     }
 
     return root;
@@ -211,7 +218,7 @@ bst_node *bst_delete(bst_node *root) {
 
 ////////////////////////////////////////////////////////////////
 
-bst_node *bst_search(bst_node *root, int value) {
+bst_node *bst_search(bst_node *root, int key) {
     /*
      * finds the node with given value, return it if note in the list, return
      * NULL
@@ -221,11 +228,11 @@ bst_node *bst_search(bst_node *root, int value) {
         return NULL;
     }
 
-    if (value < root->value) {
-        return bst_search(root->left, value);
+    if (key < root->key) {
+        return bst_search(root->left, key);
     }
-    if (value > root->value) {
-        return bst_search(root->right, value);
+    if (key > root->key) {
+        return bst_search(root->right, key);
     }
 
     return root;

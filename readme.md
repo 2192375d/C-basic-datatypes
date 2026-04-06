@@ -24,3 +24,6 @@ The motivation came from me having to rewrite the exact same code all the time, 
 
 ### for purva
 - For Fibonacci heap, should I "randomly" insert new nodes in root list (eg. random position).
+- Should I use a circular doubly-linked list for fibonacci heap?
+- Should the heap keep track of total number of elements? So that when merging, it won't have to sum up every element's degree in root-list
+- ~~follow up on the previous one, if I don't use circular linked list, should I make every heap node store the left most element?~~ (no! If you do that, then everytime when you insert a new node, you have to update every node on the doubly linked list!)

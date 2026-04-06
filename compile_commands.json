@@ -1,0 +1,121 @@
+[
+  {
+    "file": "src/array.c",
+    "arguments": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-O2",
+      "-Iinclude",
+      "src/array.c",
+      "-o",
+      "tests"
+    ],
+    "directory": "/home/lumiere/Projects/C,C++/C-basic-libraries",
+    "output": "tests"
+  },
+  {
+    "file": "src/linked_list.c",
+    "arguments": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-O2",
+      "-Iinclude",
+      "src/linked_list.c",
+      "-o",
+      "tests"
+    ],
+    "directory": "/home/lumiere/Projects/C,C++/C-basic-libraries",
+    "output": "tests"
+  },
+  {
+    "file": "src/bst.c",
+    "arguments": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-O2",
+      "-Iinclude",
+      "src/bst.c",
+      "-o",
+      "tests"
+    ],
+    "directory": "/home/lumiere/Projects/C,C++/C-basic-libraries",
+    "output": "tests"
+  },
+  {
+    "file": "src/avl.c",
+    "arguments": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-O2",
+      "-Iinclude",
+      "src/avl.c",
+      "-o",
+      "tests"
+    ],
+    "directory": "/home/lumiere/Projects/C,C++/C-basic-libraries",
+    "output": "tests"
+  },
+  {
+    "file": "src/graph.c",
+    "arguments": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-O2",
+      "-Iinclude",
+      "src/graph.c",
+      "-o",
+      "tests"
+    ],
+    "directory": "/home/lumiere/Projects/C,C++/C-basic-libraries",
+    "output": "tests"
+  },
+  {
+    "file": "src/utils.c",
+    "arguments": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-O2",
+      "-Iinclude",
+      "src/utils.c",
+      "-o",
+      "tests"
+    ],
+    "directory": "/home/lumiere/Projects/C,C++/C-basic-libraries",
+    "output": "tests"
+  },
+  {
+    "file": "src/tests.c",
+    "arguments": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-O2",
+      "-Iinclude",
+      "src/tests.c",
+      "-o",
+      "tests"
+    ],
+    "directory": "/home/lumiere/Projects/C,C++/C-basic-libraries",
+    "output": "tests"
+  }
+]

@@ -1,8 +1,8 @@
 CC = gcc
-CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -O2 -Iinclude
 
-SRC = src/array.c src/linked_list.c src/bst.c src/avl.c src/graph.c src/utils.c src/tests.c
-OUT = tests
+SRC = src/*.c
+OUT = db
 
 all: $(OUT)
 
@@ -14,5 +14,3 @@ run: $(OUT)
 
 clean:
 	rm -f $(OUT)
-
-Command to build:

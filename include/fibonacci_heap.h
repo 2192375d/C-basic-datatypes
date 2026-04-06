@@ -7,13 +7,19 @@
 #ifndef FIBONACCI_HEAP_H
 #define FIBONACCI_HEAP_H
 
-#include "fibonacci_heap_node.h"
+#include "internal/fibonacci_heap_node.h"
 #include <stdbool.h>
 
 typedef void (*print_fn)(void *);
 
+typedef struct Fibonacci_Heap_Entry_Struct {
+    int priority;
+    void *value;
+} Fibonacci_Heap_Entry;
+
 typedef struct Fibonacci_Heap_Struct {
     print_fn print;
+    int num_node;
     Fibonacci_Heap_Node *min_node;
 } Fibonacci_Heap;
 
@@ -38,5 +44,17 @@ Fibonacci_Heap *fibonacci_heap_create(print_fn print);
  */
 Fibonacci_Heap *fibonacci_heap_insert(Fibonacci_Heap *heap, int priority,
                                       void *value);
+/**
+ * union two fibonacci heaps
+ *
+ * @param heap1 first heap to union
+ * @param heap2 second heap to union
+ *
+ * @return the fibonacci heap after union
+ */
+Fibonacci_Heap *fibonacci_heap_union(Fibonacci_Heap *heap1,
+                                     Fibonacci_Heap *heap2);
+
+Fibonacci_Heap_Entry fibonacci_heap_extract_min(Fibonacci_Heap *heap);
 
 #endif

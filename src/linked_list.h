@@ -4,8 +4,6 @@
  * @brief linked list library
  */
 
-// linkedList.h
-
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
@@ -74,7 +72,7 @@ int linked_list_search(linked_list_node *head, void *value, cmp_fn compare);
  * @param head head of the input linked list
  * @param node new node to insert
  * @param count index of the new node
- * @return the heda of the linked list after insertion
+ * @return the head of the linked list after insertion
  */
 linked_list_node *linked_list_insert_count(linked_list_node *head,
                                            linked_list_node *node, int count);

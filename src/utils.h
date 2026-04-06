@@ -3,4 +3,6 @@
 
 int ds_max(int a, int b);
 
+void ds_assert(char *message);
+
 #endif
